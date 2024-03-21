@@ -26,8 +26,8 @@ public class FilmService {
         filmRepository.save(film);
     }
 
-    public void generateFilms(int page) {
-        List<Film> films = MovieDBApi.generateFilms(page);
+    public void generateFilms(int amount) {
+        List<Film> films = MovieDBApi.generateFilms(amount);
         filmRepository.saveAll(films);
     }
 }

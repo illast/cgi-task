@@ -30,7 +30,7 @@ public class FilmController {
     }
 
     @GetMapping("/generate")
-    public void generateFilms(@RequestParam(defaultValue = "0") int page) {
-        filmService.generateFilms(page);
+    public void generateFilms(@RequestParam(defaultValue = "100") int amount) {
+        filmService.generateFilms(amount);
     }
 }
