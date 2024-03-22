@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <FilmList />
+    <router-view />
   </div>
 </template>
 
 <script>
-import FilmList from './components/FilmList.vue';
-
 export default {
   name: 'App',
-  components: {
-    FilmList
-  }
 }
 </script>
 

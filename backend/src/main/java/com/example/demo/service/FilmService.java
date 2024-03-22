@@ -30,4 +30,8 @@ public class FilmService {
         List<Film> films = MovieDBApi.generateFilms(amount);
         filmRepository.saveAll(films);
     }
+
+    public Film getFilmById(Long id) {
+        return filmRepository.findById(id).orElse(null);
+    }
 }

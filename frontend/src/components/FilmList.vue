@@ -43,8 +43,9 @@
         <tbody>
         <tr v-for="film in filteredFilms" :key="film.id">
           <td>
-            <img :src="'https://image.tmdb.org/t/p/w500' + film.imagePath" alt="Film Poster" width="200">
-          </td>
+            <img :src="'https://image.tmdb.org/t/p/w500' + film.imagePath" alt="Film Poster" width="200"
+                 @click="handleImageClick(film.id)"
+                 :class="{ 'clickable': film.id }"></td>
           <td>{{ film.title }}</td>
           <td>{{ film.dateYear }}</td>
           <td>{{ film.rating }}</td>
@@ -151,6 +152,9 @@ export default {
       this.applyFiltersClicked = false;
       this.currentPage = 0;
       this.fetchFilms();
+    },
+    handleImageClick(filmId) {
+      this.$router.push(`/films/${filmId}`);
     }
   }
 }
@@ -181,5 +185,9 @@ th, td {
 
 th {
   background-color: #f2f2f2;
+}
+
+.clickable {
+  cursor: pointer;
 }
 </style>

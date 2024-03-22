@@ -33,4 +33,9 @@ public class FilmController {
     public void generateFilms(@RequestParam(defaultValue = "100") int amount) {
         filmService.generateFilms(amount);
     }
+
+    @GetMapping("/{id}")
+    public Film getFilmById(@PathVariable Long id) {
+        return filmService.getFilmById(id);
+    }
 }
