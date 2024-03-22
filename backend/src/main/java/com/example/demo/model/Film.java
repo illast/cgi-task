@@ -3,7 +3,9 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter @Setter
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -22,4 +24,8 @@ public class Film {
     private boolean adult;
     private String language;
     private String imagePath;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

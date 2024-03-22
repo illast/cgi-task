@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.FilmDto;
+import com.example.demo.mapper.FilmMapper;
 import com.example.demo.model.Film;
 import com.example.demo.repository.FilmRepository;
 import com.example.demo.utils.MovieDBApi;
@@ -16,13 +18,16 @@ import java.util.List;
 public class FilmService {
 
     private final FilmRepository filmRepository;
+    private final FilmMapper filmMapper;
 
-    public Page<Film> getFilms(int page, int size, String genre, Integer year, String language, Integer rating) {
+    public Page<FilmDto> getFilms(int page, int size, String genre, Integer year, String language, Integer rating) {
         Pageable pageable = PageRequest.of(page, size);
-        return filmRepository.findFilteredFilms(genre, year, language, rating, pageable);
+        Page<Film> films = filmRepository.findFilteredFilms(genre, year, language, rating, pageable);
+        return films.map(filmMapper::entityToDto);
     }
 
-    public void addFilm(Film film) {
+    public void addFilm(FilmDto filmDto) {
+        Film film = filmMapper.dtoToEntity(filmDto);
         filmRepository.save(film);
     }
 
@@ -31,7 +36,8 @@ public class FilmService {
         filmRepository.saveAll(films);
     }
 
-    public Film getFilmById(Long id) {
-        return filmRepository.findById(id).orElse(null);
+    public FilmDto getFilmById(Long id) {
+        Film film = filmRepository.findById(id).orElse(null);
+        return filmMapper.entityToDto(film);
     }
 }

@@ -28,7 +28,7 @@ export default {
 .header {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   padding: 10px;
 }
 </style>
