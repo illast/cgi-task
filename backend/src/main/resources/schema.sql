@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS film (
     rating DOUBLE,
     overview CLOB,
     genre VARCHAR(255),
-    age_limit INT,
+    adult BOOLEAN,
     language VARCHAR(50),
     image_path VARCHAR(255)
 );

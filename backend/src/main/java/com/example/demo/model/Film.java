@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -20,7 +19,7 @@ public class Film {
     private double rating;
     private String overview;
     private String genre;
-    private int ageLimit;
+    private boolean adult;
     private String language;
     private String imagePath;
 }

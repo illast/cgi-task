@@ -18,7 +18,7 @@
       <label for="language">Language</label>
       <select id="language" v-model="selectedLanguage">
         <option value="">Select Language</option>
-        <option v-for="language in languages" :key="language.code" :value="language.code">{{ language.name }}</option>
+        <option v-for="(name, code) in languages" :key="code" :value="code">{{ name }}</option>
       </select>
 
       <button @click="applyFilters">Apply</button>
@@ -35,7 +35,7 @@
           <th>Rating</th>
           <th>Overview</th>
           <th>Genre</th>
-          <th>Age Limit</th>
+          <th>Adult</th>
           <th>Language</th>
           <th>Start Time</th>
         </tr>
@@ -50,8 +50,8 @@
           <td>{{ film.rating }}</td>
           <td>{{ film.overview }}</td>
           <td>{{ film.genre }}</td>
-          <td>{{ film.ageLimit }}</td>
-          <td>{{ film.language }}</td>
+          <td>{{ film.adult ? 'Yes' : 'No' }}</td>
+          <td>{{ languages[film.language] || film.language }}</td>
           <td>{{ film.startTime }}</td>
         </tr>
         </tbody>
@@ -84,18 +84,18 @@ export default {
       selectedLanguage: '',
       genres: ['Comedy', 'Thriller', 'Horror'],
       applyFiltersClicked: false,
-      languages: [
-        { code: 'en', name: '🇺🇸 English' },
-        { code: 'es', name: '🇪🇸 Spanish' },
-        { code: 'zh', name: '🇨🇳 Chinese' },
-        { code: 'hi', name: '🇮🇳 Hindi' },
-        { code: 'fr', name: '🇫🇷 French' },
-        { code: 'ja', name: '🇯🇵 Japanese' },
-        { code: 'de', name: '🇩🇪 German' },
-        { code: 'ko', name: '🇰🇷 Korean' },
-        { code: 'it', name: '🇮🇹 Italian' },
-        { code: 'ru', name: '🇷🇺 Russian' }
-      ]
+      languages: {
+        'en': '🇺🇸 English',
+        'es': '🇪🇸 Spanish',
+        'zh': '🇨🇳 Chinese',
+        'hi': '🇮🇳 Hindi',
+        'fr': '🇫🇷 French',
+        'ja': '🇯🇵 Japanese',
+        'de': '🇩🇪 German',
+        'ko': '🇰🇷 Korean',
+        'it': '🇮🇹 Italian',
+        'ru': '🇷🇺 Russian'
+      }
     };
   },
   mounted() {
@@ -147,6 +147,7 @@ export default {
       this.selectedGenre = '';
       this.selectedYear = null;
       this.selectedRating = 0;
+      this.selectedLanguage = '';
       this.applyFiltersClicked = false;
       this.currentPage = 0;
       this.fetchFilms();
